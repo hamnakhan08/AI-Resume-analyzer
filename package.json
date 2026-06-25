@@ -4,7 +4,8 @@
   "description": "AI Resume Analyzer with Node.js backend proxy",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "echo build-complete"
   },
   "dependencies": {
     "cors": "^2.8.5",
