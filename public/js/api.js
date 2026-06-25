@@ -8,9 +8,17 @@ async function callClaudeAPI(resumeText, targetField) {
     body: JSON.stringify({ resumeText, targetField: targetField || '' })
   });
 
-  const data = await response.json();
+ const text = await response.text();
 
-  if (data.error) throw new Error(data.error);
+try {
+  const data = JSON.parse(text);
+
+  if (data.error) {
+    throw new Error(data.error);
+  }
 
   return data;
+} catch (e) {
+  console.error("Server returned:", text);
+  throw new Error(text);
 }
