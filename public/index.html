@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>resumecheck.ai — your resume, but make it hot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <div class="header">
+      <div class="badge"><span class="dot"></span> powered by ai</div>
+      <h1>your resume,<br>but make it <span>actually good</span></h1>
+      <p class="subtitle">drop your cv and get an honest ai breakdown — skills, score, and what's lowkey holding you back</p>
+    </div>
+
+    <div id="input-section">
+      <div class="upload-zone" id="upload-zone"
+        ondragover="event.preventDefault(); this.classList.add('drag')"
+        ondragleave="this.classList.remove('drag')"
+        ondrop="handleDrop(event)">
+        <input type="file" accept=".txt,.pdf,.doc,.docx" id="file-input" onchange="handleFile(event)" />
+        <span class="up-icon">📄</span>
+        <div class="up-label">drop your resume here</div>
+        <div class="up-sub">PDF · DOCX · TXT &nbsp;·&nbsp; click to browse</div>
+      </div>
+
+      <div id="file-chip-wrap"></div>
+      <div id="parse-status"></div>
+
+      <div class="divider">or paste it</div>
+
+      <textarea id="resume-text"
+        placeholder="paste your resume text here — work experience, skills, education, projects, the whole vibe..."
+        oninput="updateCount()"></textarea>
+      <div class="char-count"><span id="char-count">0</span> characters</div>
+
+      <div class="target-field-block">
+        <label class="target-field-label" for="target-field-select">applying for which field? <span class="optional-tag">(optional)</span></label>
+        <select id="target-field-select" onchange="handleTargetFieldChange()">
+          <option value="">— let ai auto-detect —</option>
+          <option value="Software / Web Development">Software / Web Development</option>
+          <option value="Data Science / AI / ML">Data Science / AI / ML</option>
+          <option value="Digital Marketing">Digital Marketing</option>
+          <option value="Sales & Business Development">Sales & Business Development</option>
+          <option value="Accounting & Finance">Accounting & Finance</option>
+          <option value="Human Resources">Human Resources</option>
+          <option value="Graphic / UI-UX Design">Graphic / UI-UX Design</option>
+          <option value="Mechanical Engineering">Mechanical Engineering</option>
+          <option value="Civil Engineering">Civil Engineering</option>
+          <option value="Project Management">Project Management</option>
+          <option value="Customer Support">Customer Support</option>
+          <option value="Nursing / Healthcare">Nursing / Healthcare</option>
+          <option value="__other__">Other — type my own</option>
+        </select>
+        <input type="text" id="target-field-custom" placeholder="e.g. Embedded Systems Engineering"
+          style="display:none" oninput="updateCount()" />
+      </div>
+
+      <button class="analyze-btn" id="analyze-btn" onclick="analyzeResume()">
+        ✦ analyze my resume
+      </button>
+      <div id="error-wrap"></div>
+    </div>
+
+    <div id="results"></div>
+
+    
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
