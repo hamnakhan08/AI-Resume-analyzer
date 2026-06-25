@@ -108,7 +108,7 @@ ${resumeText.slice(0, 4000)}`;
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: \`Bearer \${GROQ_API_KEY}\`
+          Authorization: `Bearer ${GROQ_API_KEY}`
         },
         body: JSON.stringify({
           model: 'llama-3.3-70b-versatile',
